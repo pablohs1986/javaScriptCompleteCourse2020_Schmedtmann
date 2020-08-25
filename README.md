@@ -1,1 +1,1 @@
-# javaScriptCompleteCourse2020_Schmedtmann
+# Exercises from Jonas Schmedtmann The Complete JavaScript 2020 course
