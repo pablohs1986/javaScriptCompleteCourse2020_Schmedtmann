@@ -132,7 +132,46 @@ yearsUntilRetirement(1986, "Pablo");*/
 
 //21. Function statements and expressions
 //Function declaration
-function whatDoYouDo(job, firstName){}
+/*function whatDoYouDo(job, firstName){}
 
 //Function expression
-var whatDoYouDo = function(job, firstname){}
+var whatDoYouDo = function(job, firstname){}*/
+
+//22. Arrays
+// Initialize
+var names = ["Sara", "Inés", "Clara"];
+var years = [33, 11, 14];
+
+console.log(names);
+console.log(names.length);
+
+// Mutate array data
+names[1] = 'Ben';
+names[5] = "Mary"
+
+console.log(names);
+
+// Different data types
+/*var john = ['John', 'Smith', 1988, 'teacher', false];
+console.log(john);
+
+john.push('blue'); // Add element at the end
+console.log(john);
+
+john.unshift("Mr."); // Add element at the beginning
+console.log(john);
+
+john.pop(); // Remove last one
+console.log(john);
+
+john.pop();
+console.log(john);
+
+john.shift(john); // Remove first element
+console.log(john);
+
+console.log(john.indexOf(1988)); // Returns position of the element
+
+var isDesigner = john.indexOf('designer') == -1 ? 'John is not a designer' : 'John is a designer'; // used for check if an element is in the array
+
+console.log(isDesigner);*/
