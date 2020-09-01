@@ -223,3 +223,34 @@ console.log(jane);*/
 console.log(john.calcAge());
 
 */
+
+//29. Loops and iteration
+
+// For
+// var nombres = ['Sara', 'Inés', 'Troya'];
+
+// for (let i = 0; i < nombres.length; i++) {
+//     console.log(nombres[i]);
+// }
+
+// While
+// var i = 0;
+// while(i < nombres.length){
+//     console.log(nombres[i]);
+//     i++;
+// }
+
+// Continue and break
+// var pablo = ['Pablo', 'Herrero', 1986, 'programador', false, 'blue'];
+
+// for (let i = 0; i < pablo.length; i++) {
+//     if(typeof pablo[i] !== 'string') continue;
+//     console.log(pablo[i]);    
+// }
+
+// console.log('***');
+
+// for (let i = 0; i < pablo.length; i++) {
+//     if(typeof pablo[i] !== 'string') break;
+//     console.log(pablo[i]);    
+// }
