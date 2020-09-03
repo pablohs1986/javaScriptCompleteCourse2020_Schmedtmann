@@ -8,3 +8,52 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
+
+////////////////////////
+
+var scores, roundScore, activePlayer;
+
+scores = [0,0];
+roundScore = 0;
+activePlayer = 0;
+
+// Funciona como un setter
+// document.querySelector('#current-' + activePlayer).textContent = dice; //Selecciona elemento --- como CSS -- y le da contenido
+// document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
+// texContent texto plano.
+// innerHTML  html
+
+// Funciona como un getter
+// var x = document.querySelector('#score-0').textContent;
+// console.log(x);
+
+// Para modificar CSS
+document.querySelector('.dice').style.display = 'none'; // style.propiedadCSS
+
+//Events
+//roll dice btn
+// function btn(){
+    
+// }
+
+// btn();
+
+// document.querySelector('#btn-roll').addEventListener('click', btn); // btn seria un callback.. funcion que se pasa como argumento, pero que realmente ejecuta el lístener
+
+document.getElementById('score-0').textContent = '0'; // POne marcadores a 0
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+document.querySelector('.btn-roll').addEventListener('click', function() {
+    var dice = Math.floor((Math.random()*6) + 1);
+
+    var diceDom = document.querySelector('.dice');
+    diceDom.style.display = 'block';
+    diceDom.src='dice-' + dice + '.png';
+
+
+
+}); // anonymous function... no se puede reutirlizar
+
+
