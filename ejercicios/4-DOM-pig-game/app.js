@@ -19,15 +19,21 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     if(gamePlaying){
         // 1. Random number
         var dice = Math.floor((Math.random()*6) + 1);
+        var dice2 = Math.floor((Math.random()*6) + 1);
 
         // 2. Display result
         var diceDom = document.querySelector('.dice');
         diceDom.style.display = 'block';
         diceDom.src='dice-' + dice + '.png';
 
+        var diceDom2 = document.querySelector('.dice2');
+        diceDom2.style.display = 'block';
+        diceDom2.src='dice-' + dice2 + '.png';
+
+
         // 3. Update the round score if the rolled number was not a 1, else, next player
-        if (dice !== 1){
-            roundScore += dice;
+        if (dice !== 1 && dice2 !== 1){
+            roundScore += dice + dice2;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         } else{
             nextPlayer()
@@ -55,7 +61,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
         var two6InARow = 0;
         if (scores[activePlayer] >= winningScore){
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
-            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.dice, .dice2').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner'); //Aplica clase winner de css
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active'); //Aplica clase winner de css
             gamePlaying = false;
@@ -80,7 +86,7 @@ function nextPlayer(){
     document.querySelector('.player-0-panel').classList.toggle('active'); // Uso de toggle (IMPORTANTE)
     document.querySelector('.player-1-panel').classList.toggle('active');
 
-    document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.dice, .dice2').style.display = 'none';
 }
 
 document.querySelector('.btn-new').addEventListener('click', init);
@@ -103,6 +109,7 @@ function init(){
 
 // Para modificar CSS
 document.querySelector('.dice').style.display = 'none'; // style.propiedadCSS
+document.querySelector('.dice2').style.display = 'none'; // style.propiedadCSS
 
 //Events
 //roll dice btn
