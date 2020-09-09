@@ -1,1 +1,1 @@
-# Exercises from Jonas Schmedtmann The Complete JavaScript 2020 course
+# Exercises from Jonas Schmedtmann's The Complete JavaScript 2020 course
