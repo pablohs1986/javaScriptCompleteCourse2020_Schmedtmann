@@ -124,7 +124,7 @@
 // var rates = arrayCalc(ages, maxHeartRate);
 // console.log(rates);
 
-// Functions returning functions
+// //Functions returning functions
 
 // function interviewQuestion(job) {
 //     if (job === 'designer'){
@@ -152,7 +152,7 @@
 
 // interviewQuestion('teacher')('Mark');
 
-// IIFE pattern [used for data privacy, code modularity]
+// //IIFE pattern [used for data privacy, code modularity]
 // function game(){
 //     var score = Math.random() * 10;
 //     console.log(score >= 5);
@@ -160,13 +160,121 @@
 
 // game();
 
-(function () {
-    var score = Math.random() * 10;
-    console.log(score >= 5);
-})();
+// (function () {
+//     var score = Math.random() * 10;
+//     console.log(score >= 5);
+// })();
 
 
-(function (goodLuck) {
-    var score = Math.random() * 10;
-    console.log(score >= 5 - goodLuck);
-})(5);
+// (function (goodLuck) {
+//     var score = Math.random() * 10;
+//     console.log(score >= 5 - goodLuck);
+// })(5);
+
+
+
+// Closures <------------ Importante
+/* Una clausura o closure es una función que guarda referencias del estado 
+adyacente (ámbito léxico). En otras palabras, una clausura permite acceder al 
+ámbito de una función exterior desde una función interior. En JavaScript, 
+las clausuras se crean cada vez que una función es creada.*/
+
+/*function retirement(retirementAge){
+    var a = ' years left until retirement.';
+    return function(yearOfBirth){
+        var age = 2020 - yearOfBirth;
+        console.log((retirementAge - age) + a)
+    }
+}
+
+var retirementUS = retirement(66);
+var retirementGermany = retirement(65);
+var retirementIceland = retirement(67);
+
+retirementGermany(1990);
+retirementUS(1990);
+retirementIceland(1990);*/
+
+/* Minichallenge: rewrite interviewQuestion() with closures*/
+
+// function interviewQuestion(job) {
+    
+//     if (job === 'designer'){
+//         return function(name){ // anonymous function dentro de otra función
+//             console.log(name + ', can you please explain what UX design is?');
+//         }
+//     } else if (job === 'teacher'){
+//         return function(name){
+//             console.log(name + ', what subject do you teach?');
+//         }
+//     } else{
+//         return function(name){
+//             console.log('Hello, ' + name + ', what do you do?');
+//         }
+//     }
+// }
+
+/*function interviewQuestion(job) {
+    return function(name){
+        if (job === 'designer'){
+            console.log(name + ', can you please explain what UX design is?');
+        } else if(job === 'teacher'){
+            console.log(name + ', what subject do you teach?');
+        } else {
+            console.log('Hello, ' + name + ', what do you do?');
+        }
+    }
+}
+
+var teacherQuestion = interviewQuestion('teacher');
+var designerQuestion = interviewQuestion('designer');
+var otherQuestion = interviewQuestion('other');
+
+teacherQuestion("Sara");
+designerQuestion('Pablo');
+otherQuestion('Sofía');*/
+
+// ->> Bind, call and apply
+
+/* The call() method is a predefined JavaScript method.
+It can be used to invoke (call) a method with an owner object as an argument (parameter).*/
+
+var john = {
+    name: 'John',
+    age: 26,
+    job: 'teacher',
+    presentation: function(style, timeOfDay){
+        if(style === 'formal'){
+            console.log('Good ' + 
+            timeOfDay + ', ladies and gentlemen! I\'m ' +
+            this.name + ' I\'m a ' + 
+            this.job + ' and I\'m ' + 
+            this.age + ' years old.');
+        }else if(style === 'friendly'){
+            console.log('hey! What\'s up! I\'m ' +
+            this.name + ' I\'m a ' +
+            this.job + ' and I\'m ' + 
+            this.age + ' years old. have a nacie ' + 
+            timeOfDay + '.');
+        }
+    }
+}
+
+var emily = {
+    name: 'Emily',
+    age: 35,
+    job: 'designer'
+}
+
+john.presentation('formal', 'morning');
+john.presentation.call(emily, 'friendly', 'afternoon'); // -> call()
+// john.presentation.apply(emily, ['friendly, afternoon']); // -> apply(), toma array como parámetro
+
+var johnjFriendly = john.presentation.bind(john, 'friendly'); // -> bind(), The bind() method returns a new function, when invoked, has its this sets to a specific value.
+
+johnjFriendly('morning');
+johnjFriendly('night');
+
+var emilyFormal = john.presentation.bind(emily, 'formal');
+
+emilyFormal('afternoon')
