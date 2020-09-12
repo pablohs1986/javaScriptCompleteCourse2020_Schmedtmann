@@ -11,12 +11,21 @@
                 console.log(i + ' ' + this.answers[i]);
             }
         }
-        this.checkAnswer = function(ans){  // 6.
+        this.checkAnswer = function(ans, callback){  // 6.
+            var sc;
+            
             if (this.correctAnswer === ans){
                 console.log('Good done!!!');
+                sc = callback(true);
             } else {
                 console.log('Sorry, try it again :(');
+                sc = callback(false);
             }
+            this.displayScore(sc);
+        }
+        this.displayScore = function(score){
+            console.log('Current score: ' + score);
+            console.log('---------------------------');
         }
     }
 
@@ -27,15 +36,41 @@
     // 3.
     var questions = [question1, question2];
 
-    // 4.
-    var n = Math.floor(Math.random() * questions.length);
+    // 10. & 11.
+    function score() {
+        var sc = 0;
+        return function(correctAnswer){
+            if (correctAnswer){
+                sc++;
+            }
+            return sc;
+        }
+    }
 
-    questions[n].displayQuestion();
+    var keepScore = score();
 
-    // 5.
-    var userAnswer = parseInt(prompt('Select and answer:')); // Ojo -> devuelve String, hay que aplicar parseInt <- 
+    // 8. & 9.
 
-    // 6.
-    questions[n].checkAnswer(userAnswer);
+    function nextQuestion(){
+        // 4.
+        var n = Math.floor(Math.random() * questions.length);
+
+        questions[n].displayQuestion();
+
+        // 5.
+        var userAnswer = prompt('Select and answer:');
+
+        // 6.
+
+        if (userAnswer !== 'exit') {
+            questions[n].checkAnswer(parseInt(userAnswer), keepScore);
+            nextQuestion();
+        }
+    }
+
+    nextQuestion();
+
+
+
 })();
 
