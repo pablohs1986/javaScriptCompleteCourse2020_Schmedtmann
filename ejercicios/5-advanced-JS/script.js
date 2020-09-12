@@ -152,7 +152,11 @@
 
 // interviewQuestion('teacher')('Mark');
 
-// //IIFE pattern [used for data privacy, code modularity]
+// //IIFE pattern [used for data privacy, code modularity] <--- IMPORTANTE
+// (function(){    // --> Crea una función que es como un wrapper
+//                 // --> Ejecuta todo lo que hay dentro
+// })();           // --> La invoca.
+
 // function game(){
 //     var score = Math.random() * 10;
 //     console.log(score >= 5);
