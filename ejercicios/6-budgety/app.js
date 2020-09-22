@@ -1,7 +1,28 @@
 // BUDGET CONTROLLER
 var budgetController = (function(){ // ---> Un módulo (IIFE + Closures)
     
+    var Expense = function(id, description, value){
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
 
+    var Income = function(id, description, value){
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+
+    var data = {
+        allItems: {
+            exp: [],
+            inc: []
+        },
+        totals: {
+            exp: 0,
+            inc: 0
+        }
+    }
 })();
 
 
@@ -34,15 +55,28 @@ var DOMstrings = { // Esto es privado
 
 
 // GLOBAL APP CONTROLLER
-var Controller = (function(budgetCtrl, UICtrl) { // ---> Otro módulo
+var controller = (function(budgetCtrl, UICtrl) { // ---> Otro módulo
 
-    var DOM = UICtrl.getDOMstrings();
+    var setupEventListeners = function() {
+
+        var DOM = UICtrl.getDOMstrings();
+
+        document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+
+        document.addEventListener('keypress', function(event) { // Esto es para que además de clickando el botón, también se ejecute el evento al pulsar enter (es la key nº 13)
+    
+            if(event.key === 13 || event.which === 13) {
+                ctrlAddItem();
+            }
+    
+        });
+    }
+
 
     var ctrlAddItem = function() {
 
         // 1. Get the filed input data
         var input = UICtrl.getInput(); // --> Usa el método getInput de UIController
-        console.log(input);
         // 2. Add the item to de budget controller
 
         // 3. Add the new item to UI
@@ -51,17 +85,15 @@ var Controller = (function(budgetCtrl, UICtrl) { // ---> Otro módulo
 
         // 5. Display de budget on the UI
         console.log('Works!');
-    }
+    };
     
-    document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
-
-    document.addEventListener('keypress', function(event) { // Esto es para que además de clickando el botón, también se ejecute el evento al pulsar enter (es la key nº 13)
-
-        if(event.key === 13 || event.which === 13) {
-            ctrlAddItem();
+    return {
+        init: function(){
+            console.log('App has started');
+            setupEventListeners();
+            
         }
-
-    });
-
+    };
 })(budgetController, UIController); // Toma los otros módulos como parámetros, a través de budgetCtrl y UICtrl, de esa forma da igual que estos cambien el nombre
 
+controller.init();
