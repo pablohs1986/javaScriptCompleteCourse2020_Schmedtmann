@@ -40,7 +40,7 @@ var budgetController = (function(){ // ---> Un módulo (IIFE + Closures)
 
             // Create new ID
             if (data.allItems[type].length > 0){
-                ID = data.allItems[type][data.allItems[type.length - 1]].id + 1;
+                ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
             } else {
                 ID = 0;
             }
@@ -101,8 +101,12 @@ var DOMstrings = { // Esto es privado
     inputDescription: '.add__description',
     inputValue: '.add__value',
     inputBtn: '.add__btn',
-    incomeContainer: '.income__list', // <--- OJO con los puntos!
-    expensesContainer: '.expenses__list'
+    incomeContainer: '.income__list', // <--- OJO con los puntos, son clases!!!
+    expensesContainer: '.expenses__list',
+    budgetlabel: '.budget__value',
+    incomeLabel: '.budget__income--value',
+    expenseLabel: '.budget__expenses--value',
+    percentageLabel: '.budget__expenses--percentage'
 }
 
     return {
@@ -149,6 +153,13 @@ var DOMstrings = { // Esto es privado
             fieldsArr[0].focus();
         },
 
+        displayBudget: function(obj){
+            document.querySelector(DOMstrings.budgetlabel).textContent = obj.budget;
+            document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
+            document.querySelector(DOMstrings.expenseLabel).textContent = obj.totalExp;
+            document.querySelector(DOMstrings.percentageLabel).textContent = obj.percentage;
+        },
+
         getDOMstrings: function() { // Expone, publica las DOMstrings
             return DOMstrings;
         }
@@ -182,7 +193,7 @@ var controller = (function(budgetCtrl, UICtrl) { // ---> Otro módulo
         // 2. Return the budget
         var budget = budgetCtrl.getBudget();
         // 3. Display de budget on the UI
-        
+        UICtrl.displayBudget(budget);
     };
 
     var ctrlAddItem = function() {
