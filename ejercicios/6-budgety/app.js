@@ -76,7 +76,7 @@ var DOMstrings = { // Esto es privado
             return{ // --> Devuelve un objeto
                 type: document.querySelector(DOMstrings.inputType).value, // inc or exp
                 description: document.querySelector(DOMstrings.inputDescription).value,
-                value: document.querySelector(DOMstrings.inputValue).value
+                value: parseFloat(document.querySelector(DOMstrings.inputValue).value)
             };
         },
 
@@ -142,23 +142,33 @@ var controller = (function(budgetCtrl, UICtrl) { // ---> Otro módulo
         });
     }
 
+    var updateBudget = function() {
+        // 1. Calculate de budget
+
+        // 2. Return the budget
+
+        // 3. Display de budget on the UI
+        
+    };
 
     var ctrlAddItem = function() {
         var input, newItem;
 
         // 1. Get the filed input data
         input = UICtrl.getInput(); // --> Usa el método getInput de UIController
-        // 2. Add the item to de budget controller
-        newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-        // 3. Add the new item to UI
-        UICtrl.addListItem(newItem, input.type);
+        
+        if (input.description !== "" && !isNaN(input.value) && input.value > 0){
+             // 2. Add the item to de budget controller
+            newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+            // 3. Add the new item to UI
+            UICtrl.addListItem(newItem, input.type);
 
-        // 4. Clear the fields
-        UICtrl.clearFields();
-        // 4. Calculate de budget
+            // 4. Clear the fields
+            UICtrl.clearFields();
 
-        // 5. Display de budget on the UI
-        console.log('Works!');
+            // 5. Calculate and update budget
+            updateBudget();
+        }
     };
     
     return {
