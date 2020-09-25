@@ -101,6 +101,20 @@ var DOMstrings = { // Esto es privado
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
         },
 
+        clearFields: function() {
+            var fields, fieldsArr;
+
+            fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue)
+
+            fieldsArr = Array.prototype.slice.call(fields) // --> Pasa lista a array
+
+            fieldsArr.forEach(function(current, index, array){ // --> Recorre los elementos y los limpia
+                current.value = "";
+            });
+
+            fieldsArr[0].focus();
+        },
+
         getDOMstrings: function() { // Expone, publica las DOMstrings
             return DOMstrings;
         }
@@ -138,6 +152,9 @@ var controller = (function(budgetCtrl, UICtrl) { // ---> Otro módulo
         newItem = budgetCtrl.addItem(input.type, input.description, input.value);
         // 3. Add the new item to UI
         UICtrl.addListItem(newItem, input.type);
+
+        // 4. Clear the fields
+        UICtrl.clearFields();
         // 4. Calculate de budget
 
         // 5. Display de budget on the UI
